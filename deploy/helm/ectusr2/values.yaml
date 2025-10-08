@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/yatrosoft/ectusr2
+  repository: ghcr.io/Yatrogenesis/ectusr2
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -25,3 +25,4 @@ orchestrator:
     minReplicas: 2
     maxReplicas: 10
     targetCPUUtilizationPercentage: 70
+
