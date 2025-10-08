@@ -1,0 +1,27 @@
+image:
+  repository: ghcr.io/yatrosoft/ectusr2
+  tag: latest
+  pullPolicy: IfNotPresent
+
+resources: {}
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+  name: ""
+
+metrics:
+  enabled: true
+  port: 9900
+
+orchestrator:
+  backend: kubernetes
+  namespace: default
+  workersName: ectusr2-workers
+  hpa:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70

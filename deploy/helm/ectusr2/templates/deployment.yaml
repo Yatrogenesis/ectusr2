@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ectusr2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ectusr2
+  template:
+    metadata:
+      labels:
+        app: ectusr2
+    spec:
+      serviceAccountName: {{ include "ectusr2.serviceAccountName" . }}
+      containers:
+        - name: ectusr2
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ORCH_BACKEND
+              value: "{{ .Values.orchestrator.backend }}"
+            - name: ECTUSR2_NAMESPACE
+              value: "{{ .Values.orchestrator.namespace }}"
+            - name: METRICS_ADDR
+              value: "0.0.0.0:{{ .Values.metrics.port }}"
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.metrics.port }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}

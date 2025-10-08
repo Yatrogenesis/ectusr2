@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ectusr2-metrics
+spec:
+  type: ClusterIP
+  selector:
+    app: ectusr2
+  ports:
+    - name: http
+      port: {{ .Values.metrics.port }}
+      targetPort: metrics
